@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cccomputer</title>
+  <link rel="icon" type="image/png" href="assets/img/logo.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <a href="index.html" class="sidebar-brand d-flex align-items-center gap-2 text-white text-decoration-none">
+        <img src="assets/img/logo.png" alt="Logo Cccomputer" class="topbar-logo">
+        <span>Cccomputer</span>
+      </a>
+      <nav class="nav flex-column sidebar-nav">
+        <a class="nav-link" href="index.html"><i class="bi bi-speedometer2"></i> Dashboard</a>
+        <a class="nav-link" href="imprimantes.html"><i class="bi bi-printer-fill"></i> Photocopieurs</a>
+        <a class="nav-link" href="clients.html"><i class="bi bi-people-fill"></i> Clients</a>
+        <a class="nav-link" href="sav.html"><i class="bi bi-tools"></i> SAV</a>
+        <a class="nav-link" href="contrats.html"><i class="bi bi-truck"></i> Livraison</a>
+        <a class="nav-link" href="factures.html"><i class="bi bi-receipt"></i> Factures et paiements</a>
+        <a class="nav-link" href="stock.html"><i class="bi bi-clock-history"></i> Historique</a>
+      </nav>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <main class="main-content">
+      <header class="topbar d-flex align-items-center justify-content-between px-3 px-md-4">
+        <div class="d-flex align-items-center gap-2">
+          <button class="btn btn-outline-secondary d-md-none" id="sidebarToggle" type="button" aria-label="Ouvrir le menu">
+            <i class="bi bi-list"></i>
+          </button>
+        </div>
+
+        <div class="d-flex align-items-center gap-2 topbar-actions">
+          <a href="messagerie.html" class="topbar-icon-link" title="Messagerie" aria-label="Messagerie"><i class="bi bi-chat-dots"></i></a>
+          <a href="calendrier.html" class="topbar-icon-link" title="Calendrier" aria-label="Calendrier"><i class="bi bi-calendar3"></i></a>
+          <a href="#" class="topbar-icon-link" title="Espace commercial" aria-label="Espace commercial"><i class="bi bi-briefcase"></i></a>
+          <a href="#" class="topbar-icon-link" title="Profil" aria-label="Profil"><i class="bi bi-person-circle"></i></a>
+          <a href="maps.html" class="topbar-icon-link" title="Maps" aria-label="Maps"><i class="bi bi-geo-alt"></i></a>
+          <button class="btn topbar-icon-link" id="themeToggle" type="button" title="Changer le thème" aria-label="Changer le thème">
+            <i class="bi bi-moon-stars"></i>
+          </button>
+          <a href="#" class="topbar-link text-danger-emphasis">
+            <i class="bi bi-box-arrow-left"></i>
+            <span>Logout</span>
+          </a>
+        </div>
+      </header>
+
+      <section class="content p-3 p-md-4">
+        <div class="row g-3 mb-4">
+          <div class="col-12 col-sm-6 col-xl-3"><div class="card kpi-card h-100"><div class="card-body"><i class="bi bi-tools kpi-icon text-danger"></i><p class="text-muted mb-1">SAV du jour</p><h2 class="h4 mb-0">4</h2><small class="text-muted">2 urgents en cours</small></div></div></div>
+          <div class="col-12 col-sm-6 col-xl-3"><div class="card kpi-card h-100"><div class="card-body"><i class="bi bi-calendar2-week kpi-icon text-warning"></i><p class="text-muted mb-1">SAV du mois</p><h2 class="h4 mb-0">17</h2><small class="text-muted">12 termines</small></div></div></div>
+          <div class="col-12 col-sm-6 col-xl-3"><div class="card kpi-card h-100"><div class="card-body"><i class="bi bi-truck kpi-icon text-primary"></i><p class="text-muted mb-1">Livraisons du jour</p><h2 class="h4 mb-0">6</h2><small class="text-muted">3 en matinee</small></div></div></div>
+          <div class="col-12 col-sm-6 col-xl-3"><div class="card kpi-card h-100"><div class="card-body"><i class="bi bi-receipt-cutoff kpi-icon text-success"></i><p class="text-muted mb-1">Paiements recus</p><h2 class="h4 mb-0">9</h2><small class="text-muted">4 en retard</small></div></div></div>
+        </div>
+        <div class="row g-3 mb-4">
+          <div class="col-xl-7">
+            <div class="card h-100">
+              <div class="card-header bg-white d-flex justify-content-between align-items-center gap-2">
+                <h2 class="h6 mb-0">Consommation</h2>
+                <select class="form-select form-select-sm chart-filter" id="consumptionFilter" aria-label="Filtre consommation">
+                  <option value="day">Par jour</option>
+                  <option value="month" selected>Par mois</option>
+                  <option value="year">Par année</option>
+                </select>
+              </div>
+              <div class="card-body">
+                <div class="consumption-chart">
+                  <svg class="consumption-svg" id="consumptionSvg" viewBox="0 0 640 260" role="img" aria-label="Courbes consommation"></svg>
+                  <div class="chart-tooltip d-none" id="chartTooltip"></div>
+                </div>
+                <div class="d-flex gap-3 mt-3 small text-muted">
+                  <span><i class="bi bi-square-fill text-dark"></i> Noir et blanc</span>
+                  <span><i class="bi bi-square-fill text-info"></i> Couleur</span>
+                </div>
+                <p class="small text-muted mt-3 mb-0">Donnees fictives : volumes mensuels en pages imprimees (NB) et pages couleur.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-5">
+            <div class="card h-100">
+              <div class="card-header bg-white d-flex justify-content-between align-items-center gap-2">
+                <h2 class="h6 mb-0">Paiements</h2>
+                <select class="form-select form-select-sm chart-filter" id="paymentsFilter" aria-label="Filtre paiements">
+                  <option value="month" selected>Par mois</option>
+                  <option value="year">Par annee</option>
+                </select>
+              </div>
+              <div class="card-body">
+                <div class="payment-box payment-paid mb-3">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                      <p class="mb-1 text-muted">Paiements</p>
+                      <h3 class="h5 mb-0" id="paymentsPaidCount">9 factures</h3>
+                    </div>
+                    <span class="badge text-bg-success" id="paymentsPaidAmount">12 480 EUR</span>
+                  </div>
+                </div>
+                <div class="payment-box payment-late mb-3">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                      <p class="mb-1 text-muted">CA a payer</p>
+                      <h3 class="h5 mb-0" id="paymentsDueCount">4 factures</h3>
+                    </div>
+                    <span class="badge text-bg-danger" id="paymentsDueAmount">3 960 EUR</span>
+                  </div>
+                </div>
+                <ul class="detail-list mb-0" id="paymentsDetailList">
+                  <li>Beta Conseil - FAC-2026-102 - Retard de 12 jours</li>
+                  <li>Delta Immo - FAC-2026-104 - Echeance aujourd'hui</li>
+                  <li>Zeta Sante - FAC-2026-112 - Relance envoyee</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3 mb-4">
+          <div class="col-lg-6">
+            <div class="card h-100">
+              <div class="card-header bg-white"><h2 class="h6 mb-0">SAV et livraisons du jour</h2></div>
+              <div class="card-body">
+                <div class="timeline-item"><span class="badge text-bg-danger">SAV</span> Gamma Industrie - Tete d'impression HS - 09:00</div>
+                <div class="timeline-item"><span class="badge text-bg-warning">SAV</span> Beta Conseil - Calibration couleur - 10:30</div>
+                <div class="timeline-item"><span class="badge text-bg-primary">Livraison</span> Orion Tech - Papier A4 x12 - 11:00</div>
+                <div class="timeline-item"><span class="badge text-bg-primary">Livraison</span> Epsilon RH - Toner noir x4 - 14:00</div>
+                <div class="timeline-item"><span class="badge text-bg-success">SAV</span> Delta Immo - Controle termine - 16:30</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="card h-100">
+              <div class="card-header bg-white"><h2 class="h6 mb-0">Clients avec problemes ou releves manquants</h2></div>
+              <div class="card-body">
+                <div class="alert-box alert-danger-soft mb-3">
+                  <strong>Gamma Industrie</strong><br>
+                  Ricoh IM C3000 : compteur non recu depuis 7 jours
+                </div>
+                <div class="alert-box alert-warning-soft mb-3">
+                  <strong>Nova Legal</strong><br>
+                  Module fax en attente de piece sur Sharp MX-2651
+                </div>
+                <div class="alert-box alert-danger-soft mb-3">
+                  <strong>Zeta Sante</strong><br>
+                  Xerox VersaLink C405 : releve absent depuis 8 jours
+                </div>
+                <div class="alert-box alert-warning-soft">
+                  <strong>Beta Conseil</strong><br>
+                  Canon i-SENSYS X 1643P : compteur non recu depuis 4 jours
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header bg-white"><h2 class="h6 mb-0">Synthese parc et activite</h2></div>
+          <div class="card-body">
+            <div class="row g-3">
+              <div class="col-md-4">
+                <div class="summary-tile">
+                  <p class="text-muted mb-1">Clients actifs</p>
+                  <h3 class="h4 mb-1">48</h3>
+                  <small>132 photocopieurs suivis</small>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="summary-tile">
+                  <p class="text-muted mb-1">Releves recus aujourd'hui</p>
+                  <h3 class="h4 mb-1">89%</h3>
+                  <small>14 machines a surveiller</small>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="summary-tile">
+                  <p class="text-muted mb-1">Toners bas detectes</p>
+                  <h3 class="h4 mb-1">11</h3>
+                  <small>3 livraisons a preparer</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <button
+    class="btn btn-primary client-fab rounded-circle shadow"
+    type="button"
+    data-bs-toggle="modal"
+    data-bs-target="#clientsModal"
+    aria-label="Afficher les clients"
+    title="Afficher les clients"
+  >
+    <i class="bi bi-people-fill"></i>
+  </button>
+
+  <div class="modal fade" id="clientsModal" tabindex="-1" aria-labelledby="clientsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title h5 mb-0" id="clientsModalLabel">Liste des clients</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <input type="search" class="form-control" id="clientSearchInput" placeholder="Filtrer par nom, prénom ou raison sociale">
+          </div>
+          <div class="row g-3">
+            <div class="col-12 col-md-6 col-xl-4"><button type="button" class="card client-block client-trigger h-100 w-100 text-start" data-client-name="Alpha Bureau" data-client-firstname="Sophie" data-client-lastname="Martin" data-client-manager="Jean Martin" data-client-phone2="01 43 20 11 99" data-client-hours="Lun: 08:30 - 18:00|Mar: 08:30 - 18:00|Mer: 08:30 - 18:00|Jeu: 08:30 - 18:00|Ven: 08:30 - 17:30|Sam: Ferme|Dim: Ferme" data-client-rib="FR76 3000 4000 5000 6000 7000 189" data-client-last-payment="05/04/2026 - 1 250 EUR" data-client-invoice="FAC-2026-101 - Maintenance trimestrielle" data-client-unpaid="FAC-2026-101 - 1 250 EUR" data-client-contact="Sophie Martin" data-client-city="Paris" data-client-email="s.martin@alpha.fr" data-client-phone="01 43 20 11 22" data-client-address="18 rue Lafayette, 75009 Paris" data-client-status="Client actif depuis 2021" data-client-photocopieurs="HP LaserJet M507;;192.168.10.21;;00:1A:2B:3C:4D:51;;HPM507-09341;;482156;;0;;Noir 68%;;1|HP Color LaserJet E55040;;192.168.10.22;;00:1A:2B:3C:4D:52;;HPE55040-11820;;319870;;84210;;Noir 54%, Cyan 37%, Magenta 42%, Jaune 33%;;5" data-client-sav="SAV-2026-041 - Terminé - Remplacement rouleaux|SAV-2026-046 - En cours - Bourrage papier récurrent" data-client-livraison="LIV-2026-011 - Toners livrés le 08/04/2026|LIV-2026-018 - Papier A4 livré le 15/04/2026"><span class="card-body d-block"><h3 class="h6 mb-1">Alpha Bureau</h3><p class="mb-1 text-muted">Sophie Martin</p><p class="mb-1">Paris</p><p class="mb-1 small">01 43 20 11 22</p><small class="text-muted">s.martin@alpha.fr</small></span></button></div>
+            <div class="col-12 col-md-6 col-xl-4"><button type="button" class="card client-block client-trigger h-100 w-100 text-start" data-client-name="Beta Conseil" data-client-firstname="Lucas" data-client-lastname="Perez" data-client-manager="Claire Bernard" data-client-phone2="04 72 88 90 11" data-client-hours="Lun: 09:00 - 18:30|Mar: 09:00 - 18:30|Mer: 09:00 - 18:30|Jeu: 09:00 - 18:30|Ven: 09:00 - 17:30|Sam: Ferme|Dim: Ferme" data-client-rib="FR76 1027 8030 4500 1200 3300 987" data-client-last-payment="28/03/2026 - 980 EUR" data-client-invoice="FAC-2026-102 - Abonnement mensuel" data-client-unpaid="FAC-2026-102 - 980 EUR" data-client-contact="Lucas Perez" data-client-city="Lyon" data-client-email="l.perez@beta.fr" data-client-phone="04 72 88 90 10" data-client-address="42 avenue Foch, 69006 Lyon" data-client-status="Contrat premium jusqu'en 2027" data-client-photocopieurs="Canon iR-ADV C3520;;192.168.10.45;;10:2B:3C:4D:5E:61;;CAN3520-8890;;215440;;56320;;Noir 61%, Cyan 44%, Magenta 49%, Jaune 40%;;2|Canon i-SENSYS X 1643P;;192.168.10.46;;10:2B:3C:4D:5E:62;;CISX1643-2231;;98210;;0;;Noir 72%;;4" data-client-sav="SAV-2026-042 - En cours - Calibration couleur|SAV-2026-047 - Planifiée - Maintenance préventive" data-client-livraison="LIV-2026-014 - Kit maintenance livré le 11/04/2026"><span class="card-body d-block"><h3 class="h6 mb-1">Beta Conseil</h3><p class="mb-1 text-muted">Lucas Perez</p><p class="mb-1">Lyon</p><p class="mb-1 small">04 72 88 90 10</p><small class="text-muted">l.perez@beta.fr</small></span></button></div>
+            <div class="col-12 col-md-6 col-xl-4"><button type="button" class="card client-block client-trigger h-100 w-100 text-start" data-client-name="Gamma Industrie" data-client-firstname="Nadia" data-client-lastname="El Idrissi" data-client-manager="Omar El Idrissi" data-client-phone2="03 20 44 67 15" data-client-hours="Lun: 07:30 - 17:30|Mar: 07:30 - 17:30|Mer: 07:30 - 17:30|Jeu: 07:30 - 17:30|Ven: 07:30 - 16:30|Sam: Ferme|Dim: Ferme" data-client-rib="FR76 3000 2000 1500 8800 9900 774" data-client-last-payment="01/04/2026 - 1 860 EUR" data-client-invoice="FAC-2026-110 - Contrat multisites" data-client-unpaid="FAC-2026-110 - 2 240 EUR" data-client-contact="Nadia El Idrissi" data-client-city="Lille" data-client-email="n.elidrissi@gamma.fr" data-client-phone="03 20 44 67 12" data-client-address="7 zone industrielle Nord, 59000 Lille" data-client-status="Parc de 3 machines" data-client-photocopieurs="Epson WorkForce Pro WF-C5790;;192.168.11.10;;20:3C:4D:5E:6F:71;;EPS5790-1142;;156330;;64220;;Noir 66%, Cyan 58%, Magenta 55%, Jaune 51%;;1|Ricoh IM C3000;;192.168.11.11;;20:3C:4D:5E:6F:72;;RICOH3000-0441;;267520;;98310;;Noir 49%, Cyan 28%, Magenta 31%, Jaune 26%;;7|HP LaserJet Enterprise M611;;192.168.11.12;;20:3C:4D:5E:6F:73;;HPM611-4509;;189004;;0;;Noir 43%;;2" data-client-sav="SAV-2026-043 - Urgent - Tête d'impression HS|SAV-2026-048 - Terminée - Installation nouvelle machine" data-client-livraison="LIV-2026-019 - Tambour livré le 16/04/2026"><span class="card-body d-block"><h3 class="h6 mb-1">Gamma Industrie</h3><p class="mb-1 text-muted">Nadia El Idrissi</p><p class="mb-1">Lille</p><p class="mb-1 small">03 20 44 67 12</p><small class="text-muted">n.elidrissi@gamma.fr</small></span></button></div>
+            <div class="col-12 col-md-6 col-xl-4"><button type="button" class="card client-block client-trigger h-100 w-100 text-start" data-client-name="Delta Immo" data-client-firstname="Antoine" data-client-lastname="Muller" data-client-manager="Sophie Keller" data-client-phone2="05 56 10 98 75" data-client-hours="Lun: 09:00 - 18:00|Mar: 09:00 - 18:00|Mer: 09:00 - 18:00|Jeu: 09:00 - 18:00|Ven: 09:00 - 17:00|Sam: 09:30 - 12:30|Dim: Ferme" data-client-rib="FR76 1659 8000 2100 4500 8800 321" data-client-last-payment="11/04/2026 - 740 EUR" data-client-invoice="FAC-2026-104 - Fournitures bureau" data-client-unpaid="FAC-2026-104 - 740 EUR" data-client-contact="Antoine Muller" data-client-city="Bordeaux" data-client-email="a.muller@delta.fr" data-client-phone="05 56 10 98 71" data-client-address="12 quai des Chartrons, 33000 Bordeaux" data-client-status="Livraison mensuelle consommables" data-client-photocopieurs="Brother MFC-L6900DW;;192.168.12.14;;30:4D:5E:6F:70:81;;BRO6900-3350;;124780;;0;;Noir 57%;;3" data-client-sav="SAV-2026-044 - Terminé - Remplacement toner" data-client-livraison="LIV-2026-009 - Toners livrés le 05/04/2026|LIV-2026-020 - Ramettes livrées le 16/04/2026"><span class="card-body d-block"><h3 class="h6 mb-1">Delta Immo</h3><p class="mb-1 text-muted">Antoine Muller</p><p class="mb-1">Bordeaux</p><p class="mb-1 small">05 56 10 98 71</p><small class="text-muted">a.muller@delta.fr</small></span></button></div>
+            <div class="col-12 col-md-6 col-xl-4"><button type="button" class="card client-block client-trigger h-100 w-100 text-start" data-client-name="Epsilon RH" data-client-firstname="Claire" data-client-lastname="Moreau" data-client-manager="Thomas Moreau" data-client-phone2="04 91 21 37 58" data-client-hours="Lun: 08:00 - 17:30|Mar: 08:00 - 17:30|Mer: 08:00 - 17:30|Jeu: 08:00 - 17:30|Ven: 08:00 - 16:30|Sam: Ferme|Dim: Ferme" data-client-rib="FR76 4255 9900 4100 2200 6500 442" data-client-last-payment="09/04/2026 - 1 120 EUR" data-client-invoice="FAC-2026-105 - Consommables mensuels" data-client-unpaid="FAC-2026-105 - 1 120 EUR" data-client-contact="Claire Moreau" data-client-city="Marseille" data-client-email="c.moreau@epsilon.fr" data-client-phone="04 91 21 37 50" data-client-address="25 boulevard Michelet, 13008 Marseille" data-client-status="Client multisites" data-client-photocopieurs="Kyocera ECOSYS M3645;;192.168.12.32;;40:5E:6F:70:81:91;;KYO3645-7622;;203114;;0;;Noir 52%;;6|Kyocera TASKalfa 2554ci;;192.168.12.33;;40:5E:6F:70:81:92;;KYO2554-1876;;144280;;47390;;Noir 48%, Cyan 39%, Magenta 36%, Jaune 35%;;2" data-client-sav="SAV-2026-045 - En cours - Problème scanner|SAV-2026-050 - Terminée - Révision annuelle" data-client-livraison="LIV-2026-012 - Toners livrés le 09/04/2026"><span class="card-body d-block"><h3 class="h6 mb-1">Epsilon RH</h3><p class="mb-1 text-muted">Claire Moreau</p><p class="mb-1">Marseille</p><p class="mb-1 small">04 91 21 37 50</p><small class="text-muted">c.moreau@epsilon.fr</small></span></button></div>
+            <div class="col-12 col-md-6 col-xl-4"><button type="button" class="card client-block client-trigger h-100 w-100 text-start" data-client-name="Zeta Santé" data-client-firstname="Karim" data-client-lastname="Haddad" data-client-manager="Dr. Sarah Haddad" data-client-phone2="02 40 33 49 90" data-client-hours="Lun: 08:00 - 19:00|Mar: 08:00 - 19:00|Mer: 08:00 - 19:00|Jeu: 08:00 - 19:00|Ven: 08:00 - 18:00|Sam: 08:30 - 12:00|Dim: Ferme" data-client-rib="FR76 1390 7000 5100 7600 3400 228" data-client-last-payment="30/03/2026 - 690 EUR" data-client-invoice="FAC-2026-112 - Contrat standard" data-client-unpaid="FAC-2026-112 - 690 EUR" data-client-contact="Karim Haddad" data-client-city="Nantes" data-client-email="k.haddad@zeta.fr" data-client-phone="02 40 33 49 86" data-client-address="3 rue de la Santé, 44000 Nantes" data-client-status="Contrat standard" data-client-photocopieurs="Xerox VersaLink C405;;192.168.14.20;;50:6F:70:81:92:A1;;XER405-9911;;76200;;28110;;Noir 24%, Cyan 19%, Magenta 17%, Jaune 16%;;8" data-client-sav="SAV-2026-052 - Planifiée - Nettoyage complet" data-client-livraison="LIV-2026-015 - Toner noir livré le 12/04/2026"><span class="card-body d-block"><h3 class="h6 mb-1">Zeta Santé</h3><p class="mb-1 text-muted">Karim Haddad</p><p class="mb-1">Nantes</p><p class="mb-1 small">02 40 33 49 86</p><small class="text-muted">k.haddad@zeta.fr</small></span></button></div>
+            <div class="col-12 col-md-6 col-xl-4"><button type="button" class="card client-block client-trigger h-100 w-100 text-start" data-client-name="Nova Legal" data-client-firstname="Julie" data-client-lastname="Renaud" data-client-manager="Marc Renaud" data-client-phone2="03 88 16 75 49" data-client-hours="Lun: 09:00 - 19:00|Mar: 09:00 - 19:00|Mer: 09:00 - 19:00|Jeu: 09:00 - 19:00|Ven: 09:00 - 18:00|Sam: Ferme|Dim: Ferme" data-client-rib="FR76 2004 1010 1005 0500 6M02 606" data-client-last-payment="02/04/2026 - 1 410 EUR" data-client-invoice="FAC-2026-113 - Location + SAV" data-client-unpaid="FAC-2026-113 - 1 410 EUR" data-client-contact="Julie Renaud" data-client-city="Strasbourg" data-client-email="j.renaud@nova.fr" data-client-phone="03 88 16 75 44" data-client-address="8 place Broglie, 67000 Strasbourg" data-client-status="Contrat location + SAV" data-client-photocopieurs="Sharp MX-2651;;192.168.15.31;;60:70:81:92:A3:B1;;SHARP2651-7310;;110540;;35680;;Noir 63%, Cyan 41%, Magenta 38%, Jaune 34%;;1|HP LaserJet M404dn;;192.168.15.32;;60:70:81:92:A3:B2;;HPM404-5532;;84550;;0;;Noir 46%;;9" data-client-sav="SAV-2026-053 - En attente pièce - Module fax" data-client-livraison="LIV-2026-016 - Tambour livré le 13/04/2026"><span class="card-body d-block"><h3 class="h6 mb-1">Nova Legal</h3><p class="mb-1 text-muted">Julie Renaud</p><p class="mb-1">Strasbourg</p><p class="mb-1 small">03 88 16 75 44</p><small class="text-muted">j.renaud@nova.fr</small></span></button></div>
+            <div class="col-12 col-md-6 col-xl-4"><button type="button" class="card client-block client-trigger h-100 w-100 text-start" data-client-name="Orion Tech" data-client-firstname="Mehdi" data-client-lastname="Benali" data-client-manager="Leila Benali" data-client-phone2="04 67 19 53 68" data-client-hours="Lun: 08:30 - 18:30|Mar: 08:30 - 18:30|Mer: 08:30 - 18:30|Jeu: 08:30 - 18:30|Ven: 08:30 - 17:30|Sam: Ferme|Dim: Ferme" data-client-rib="FR76 1010 7003 0020 1000 4400 118" data-client-last-payment="21/03/2026 - 2 040 EUR" data-client-invoice="FAC-2026-114 - Projet extension parc" data-client-unpaid="FAC-2026-114 - 2 040 EUR" data-client-contact="Mehdi Benali" data-client-city="Montpellier" data-client-email="m.benali@orion.fr" data-client-phone="04 67 19 53 62" data-client-address="55 rue de la République, 34000 Montpellier" data-client-status="Parc en croissance" data-client-photocopieurs="Ricoh IM C3000;;192.168.13.19;;70:81:92:A3:B4:C1;;RICOH3000-0441;;201870;;74420;;Noir 58%, Cyan 46%, Magenta 44%, Jaune 39%;;2|Ricoh P 502;;192.168.13.20;;70:81:92:A3:B4:C2;;RICOHP502-7781;;65420;;0;;Noir 69%;;4" data-client-sav="SAV-2026-051 - En attente pièce - Bac papier|SAV-2026-054 - Terminée - Configuration réseau" data-client-livraison="LIV-2026-017 - Papier livré le 14/04/2026|LIV-2026-021 - Toner cyan livré le 16/04/2026"><span class="card-body d-block"><h3 class="h6 mb-1">Orion Tech</h3><p class="mb-1 text-muted">Mehdi Benali</p><p class="mb-1">Montpellier</p><p class="mb-1 small">04 67 19 53 62</p><small class="text-muted">m.benali@orion.fr</small></span></button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="clientDetailsModal" tabindex="-1" aria-labelledby="clientDetailsLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl detail-modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title h5 mb-0" id="clientDetailsLabel">Détail client</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-3 mb-3 detail-top-row">
+            <div class="col-md-6">
+              <div class="card detail-panel h-100">
+                <div class="card-body detail-info-body">
+                  <h3 class="h6 mb-3">Informations générales</h3>
+                  <p class="mb-2"><strong>Raison sociale :</strong> <span id="detailClientName"></span></p>
+                  <p class="mb-2"><strong>Mail :</strong> <span id="detailClientEmail"></span></p>
+                  <p class="mb-2"><strong>Nom :</strong> <span id="detailClientLastName"></span></p>
+                  <p class="mb-2"><strong>Prénom :</strong> <span id="detailClientFirstName"></span></p>
+                  <p class="mb-2"><strong>Dirigeant :</strong> <span id="detailClientManager"></span></p>
+                  <p class="mb-2"><strong>Téléphone 1 :</strong> <span id="detailClientPhone"></span></p>
+                  <p class="mb-2"><strong>Téléphone 2 :</strong> <span id="detailClientPhone2"></span></p>
+                  <p class="mb-2"><strong>Ville :</strong> <span id="detailClientCity"></span></p>
+                  <p class="mb-2"><strong>Adresse :</strong> <span id="detailClientAddress"></span></p>
+                  <div class="mb-2"><strong>Horaires semaine :</strong><div id="detailClientWeekHours" class="week-hours-list"></div></div>
+                  <p class="mb-2"><strong>RIB :</strong> <span id="detailClientRib"></span></p>
+                  <p class="mb-2"><strong>Dernier paiement :</strong> <span id="detailClientLastPayment"></span></p>
+                  <p class="mb-2"><strong>Facture :</strong> <span id="detailClientInvoice"></span></p>
+                  <p class="mb-0"><strong>Facture non payée :</strong> <span id="detailClientUnpaidInvoice"></span></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card detail-panel detail-photocopiers-panel h-100">
+                <div class="card-body detail-photocopiers-body">
+                  <h3 class="h6 mb-3">Photocopieurs rattachés</h3>
+                  <ul class="detail-list mb-0" id="detailPhotocopieurs"></ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row g-3">
+            <div class="col-lg-4">
+              <div class="card detail-panel h-100">
+                <div class="card-body">
+                  <h3 class="h6 mb-3">Appels téléphoniques</h3>
+                  <ul class="detail-list mb-0" id="detailCalls"></ul>
+                  <button class="btn btn-link btn-sm px-0 mt-2 toggle-more d-none" type="button" id="toggleCallsBtn" data-target="detailCalls">Voir plus</button>
+                  <button class="btn btn-outline-primary mt-3" type="button" id="openCallModalBtn">Nouvel appel</button>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="card detail-panel h-100">
+                <div class="card-body">
+                  <h3 class="h6 mb-3">SAV</h3>
+                  <ul class="detail-list mb-0" id="detailSav"></ul>
+                  <button class="btn btn-link btn-sm px-0 mt-2 toggle-more d-none" type="button" id="toggleSavBtn" data-target="detailSav">Voir plus</button>
+                  <button class="btn btn-outline-primary mt-3" type="button" id="openSavModalBtn">Nouveau SAV</button>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="card detail-panel h-100">
+                <div class="card-body">
+                  <h3 class="h6 mb-3">Livraisons</h3>
+                  <ul class="detail-list mb-0" id="detailLivraisons"></ul>
+                  <button class="btn btn-link btn-sm px-0 mt-2 toggle-more d-none" type="button" id="toggleLivraisonsBtn" data-target="detailLivraisons">Voir plus</button>
+                  <button class="btn btn-outline-primary mt-3" type="button" id="openLivraisonModalBtn">Nouvelle livraison</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="historyListModal" tabindex="-1" aria-labelledby="historyListModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title h5 mb-0" id="historyListModalLabel">Historique complet</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+        </div>
+        <div class="modal-body">
+          <ul class="detail-list mb-0" id="historyListContent"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="savFormModal" tabindex="-1" aria-labelledby="savFormModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title h5 mb-0" id="savFormModalLabel">Nouveau SAV</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="savGeneratedNumber" class="form-label">Numéro SAV</label>
+            <input type="text" class="form-control" id="savGeneratedNumber" readonly>
+          </div>
+          <div class="mb-3">
+            <label for="savTechnician" class="form-label">Technicien</label>
+            <select class="form-select" id="savTechnician">
+              <option value="">Choisir un technicien</option>
+              <option>Romain Lefevre</option>
+              <option>Camille Dupont</option>
+              <option>Yanis Touati</option>
+              <option>Sarah Benali</option>
+              <option>Thomas Garcia</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="savPlannedDate" class="form-label">Date de passage prévu</label>
+            <input type="date" class="form-control" id="savPlannedDate">
+          </div>
+          <div class="mb-3">
+            <label for="savOpenedDate" class="form-label">Date d'ouverture</label>
+            <input type="date" class="form-control" id="savOpenedDate" readonly>
+          </div>
+          <div class="mb-3">
+            <label for="savProblem" class="form-label">Type de problème</label>
+            <select class="form-select" id="savProblem">
+              <option value="">Choisir un problème</option>
+              <option>Bourrage papier</option>
+              <option>Problème scanner</option>
+              <option>Erreur réseau</option>
+              <option>Défaut impression</option>
+              <option>Maintenance préventive</option>
+              <option>Panne alimentation</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="savLevel" class="form-label">Priorité</label>
+            <select class="form-select" id="savLevel">
+              <option value="">Choisir une priorité</option>
+              <option>Urgente</option>
+              <option>Haute</option>
+              <option>Normale</option>
+              <option>Basse</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="savStatus" class="form-label">Statut</label>
+            <select class="form-select" id="savStatus">
+              <option value="">Choisir un statut</option>
+              <option>En attente</option>
+              <option>En cours</option>
+              <option>Résolu</option>
+            </select>
+          </div>
+          <div class="mb-0">
+            <label for="savComment" class="form-label">Commentaire</label>
+            <textarea class="form-control" id="savComment" rows="3" placeholder="Ajouter un commentaire"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+          <button type="button" class="btn btn-primary" id="saveSavBtn">Ajouter le SAV</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="callFormModal" tabindex="-1" aria-labelledby="callFormModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title h5 mb-0" id="callFormModalLabel">Nouvel appel</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="callClient" class="form-label">Client</label>
+            <input type="text" class="form-control" id="callClient" readonly>
+          </div>
+          <div class="mb-3">
+            <label for="callReason" class="form-label">Motif de l'appel</label>
+            <input type="text" class="form-control" id="callReason" placeholder="Motif de l'appel">
+          </div>
+          <div class="mb-3">
+            <label for="callTime" class="form-label">Heure de l'appel</label>
+            <input type="text" class="form-control" id="callTime" readonly>
+          </div>
+          <div class="mb-3">
+            <label for="callAnsweredBy" class="form-label">Personne qui a répondu</label>
+            <select class="form-select" id="callAnsweredBy">
+              <option value="">Choisir un utilisateur</option>
+              <option>Romain Lefevre</option>
+              <option>Camille Dupont</option>
+              <option>Yanis Touati</option>
+              <option>Sarah Benali</option>
+              <option>Thomas Garcia</option>
+            </select>
+          </div>
+          <div class="mb-0">
+            <label for="callComment" class="form-label">Commentaire</label>
+            <textarea class="form-control" id="callComment" rows="3" placeholder="Ajouter un commentaire"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+          <button type="button" class="btn btn-primary" id="saveCallBtn">Ajouter l'appel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="livraisonFormModal" tabindex="-1" aria-labelledby="livraisonFormModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title h5 mb-0" id="livraisonFormModalLabel">Nouvelle livraison</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="livraisonProduct" class="form-label">Produit à livrer</label>
+            <select class="form-select" id="livraisonProduct">
+              <option value="">Choisir un produit</option>
+              <option value="Papier" data-stock="32">Papier</option>
+              <option value="Toner noir" data-stock="15">Toner noir</option>
+              <option value="Toner cyan" data-stock="4">Toner cyan</option>
+              <option value="Toner magenta" data-stock="6">Toner magenta</option>
+              <option value="Toner jaune" data-stock="5">Toner jaune</option>
+              <option value="PC" data-stock="3">PC</option>
+              <option value="LCD" data-stock="2">LCD</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="livraisonQuantity" class="form-label">Quantité</label>
+            <input type="number" class="form-control" id="livraisonQuantity" min="1" placeholder="Quantité à livrer">
+            <div class="form-text" id="livraisonStockInfo">Stock disponible : -</div>
+          </div>
+          <div class="mb-3">
+            <label for="livraisonDriver" class="form-label">Livreur</label>
+            <select class="form-select" id="livraisonDriver">
+              <option value="">Choisir un livreur</option>
+              <option>Amine B.</option>
+              <option>Julie M.</option>
+              <option>Karim T.</option>
+              <option>Sofiane D.</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="livraisonPlannedDate" class="form-label">Date de livraison prévue</label>
+            <input type="date" class="form-control" id="livraisonPlannedDate">
+          </div>
+          <div class="mb-3">
+            <label for="livraisonSlot" class="form-label">Créneau de livraison</label>
+            <select class="form-select" id="livraisonSlot">
+              <option value="">Choisir un créneau</option>
+              <option>08:00 - 10:00</option>
+              <option>10:00 - 12:00</option>
+              <option>13:00 - 15:00</option>
+              <option>15:00 - 17:00</option>
+              <option>17:00 - 18:30</option>
+            </select>
+          </div>
+          <div class="mb-0">
+            <label for="livraisonComment" class="form-label">Commentaire</label>
+            <textarea class="form-control" id="livraisonComment" rows="3" placeholder="Ajouter un commentaire"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+          <button type="button" class="btn btn-primary" id="saveLivraisonBtn">Ajouter la livraison</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

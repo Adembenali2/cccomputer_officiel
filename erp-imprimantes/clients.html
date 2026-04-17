@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cccomputer</title>
+  <link rel="icon" type="image/png" href="assets/img/logo.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="layout">
+        <aside class="sidebar" id="sidebar">
+      <a href="index.html" class="sidebar-brand d-flex align-items-center gap-2 text-white text-decoration-none">
+        <img src="assets/img/logo.png" alt="Logo Cccomputer" class="topbar-logo">
+        <span>Cccomputer</span>
+      </a>
+      <nav class="nav flex-column sidebar-nav">
+        <a class="nav-link" href="index.html"><i class="bi bi-speedometer2"></i> Dashboard</a>
+        <a class="nav-link" href="imprimantes.html"><i class="bi bi-printer-fill"></i> Photocopieurs</a>
+        <a class="nav-link" href="clients.html"><i class="bi bi-people-fill"></i> Clients</a>
+        <a class="nav-link" href="sav.html"><i class="bi bi-tools"></i> SAV</a>
+        <a class="nav-link" href="contrats.html"><i class="bi bi-truck"></i> Livraison</a>
+        <a class="nav-link" href="factures.html"><i class="bi bi-receipt"></i> Factures et paiements</a>
+        <a class="nav-link" href="stock.html"><i class="bi bi-clock-history"></i> Historique</a>
+      </nav>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <main class="main-content">
+            <header class="topbar d-flex align-items-center justify-content-between px-3 px-md-4">
+        <div class="d-flex align-items-center gap-2">
+          <button class="btn btn-outline-secondary d-md-none" id="sidebarToggle" type="button" aria-label="Ouvrir le menu">
+            <i class="bi bi-list"></i>
+          </button>
+        </div>
+
+        <div class="d-flex align-items-center gap-2 topbar-actions">
+          <a href="messagerie.html" class="topbar-icon-link" title="Messagerie" aria-label="Messagerie"><i class="bi bi-chat-dots"></i></a>
+          <a href="calendrier.html" class="topbar-icon-link" title="Calendrier" aria-label="Calendrier"><i class="bi bi-calendar3"></i></a>
+          <a href="#" class="topbar-icon-link" title="Espace commercial" aria-label="Espace commercial"><i class="bi bi-briefcase"></i></a>
+          <a href="#" class="topbar-icon-link" title="Profil" aria-label="Profil"><i class="bi bi-person-circle"></i></a>
+          <a href="maps.html" class="topbar-icon-link" title="Maps" aria-label="Maps"><i class="bi bi-geo-alt"></i></a>
+          <button class="btn topbar-icon-link" id="themeToggle" type="button" title="Changer le thème" aria-label="Changer le thème">
+            <i class="bi bi-moon-stars"></i>
+          </button>
+          <a href="#" class="topbar-link text-danger-emphasis">
+            <i class="bi bi-box-arrow-left"></i>
+            <span>Logout</span>
+          </a>
+        </div>
+      </header>
+
+      <section class="content p-3 p-md-4">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-stretch align-items-md-center gap-2 mb-3">
+          <div class="input-group" style="max-width: 560px;">
+            <span class="input-group-text"><i class="bi bi-search"></i></span>
+            <input
+              type="search"
+              id="clientsSearchInput"
+              class="form-control"
+              placeholder="Rechercher par nom, prénom, dirigeant, raison sociale, adresse..."
+            >
+          </div>
+          <button class="btn btn-primary" type="button" id="openAddClientModalBtn"><i class="bi bi-plus-lg"></i> Ajouter client</button>
+        </div>
+
+        <div class="card">
+          <div class="card-header bg-white">
+            <h1 class="h6 mb-0">Liste complete des clients</h1>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-striped table-hover mb-0 clients-table">
+                <thead class="table-light">
+                  <tr>
+                    <th>Raison sociale</th>
+                    <th>Dirigeant</th>
+                    <th>Email</th>
+                    <th>Téléphone</th>
+                    <th>Adresse</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="clientsTableBody">
+                  <tr><td>Alpha Bureau</td><td>Karim Amrani</td><td>contact@alpha-bureau.fr</td><td>01 43 20 11 22</td><td>12 Rue des Arts, 75002 Paris</td><td class="table-actions"><a href="#" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="SAV SAV20260416014 - Technicien: Youssef El Idrissi - Date prévue: 20/04/2026 09:30 - Problème: Calibration couleur"><i class="bi bi-tools"></i></a><a href="#" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Facture FAC-2026-104 - Date facture: 10/04/2026 - Consommation produit: Toner noir x4 + Papier A4 x12 - Montant: 3960 EUR"><i class="bi bi-receipt-cutoff"></i></a><a href="#" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Livraison prévue le 18/04/2026 - Livreur: Rachid M. - Produit: Toner noir x4"><i class="bi bi-truck"></i></a></td></tr>
+                  <tr><td>Beta Conseil</td><td>Salma Benali</td><td>direction@beta-conseil.fr</td><td>04 72 88 90 10</td><td>8 Avenue Part-Dieu, 69003 Lyon</td><td class="table-actions"><a href="#" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="SAV SAV20260416022 - Technicien: Karim B. - Date prévue: 20/04/2026 14:00 - Problème: Bourrage papier recurrent"><i class="bi bi-tools"></i></a><a href="#" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Livraison prévue le 19/04/2026 - Livreur: Nadia K. - Produit: Papier A4 x12"><i class="bi bi-truck"></i></a></td></tr>
+                  <tr><td>Gamma Industrie</td><td>Mehdi Tazi</td><td>admin@gamma-industrie.fr</td><td>03 20 44 67 12</td><td>41 Rue Nationale, 59000 Lille</td><td class="table-actions"><a href="#" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Facture FAC-2026-112 - Date facture: 11/04/2026 - Consommation produit: Toner cyan x2 + Kit maintenance - Montant: 2840 EUR"><i class="bi bi-receipt-cutoff"></i></a></td></tr>
+                  <tr><td>Delta Immo</td><td>Rachid El Fassi</td><td>contact@delta-immo.fr</td><td>05 56 10 98 71</td><td>26 Cours Victor Hugo, 33000 Bordeaux</td><td class="table-actions"><a href="#" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Livraison prévue le 21/04/2026 - Livreur: Youssef A. - Produit: Toner cyan x2"><i class="bi bi-truck"></i></a></td></tr>
+                  <tr><td>Epsilon RH</td><td>Nadia Chafik</td><td>service@epsilon-rh.fr</td><td>04 91 21 37 50</td><td>15 Boulevard National, 13001 Marseille</td><td class="table-actions"><a href="#" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="SAV SAV20260415009 - Technicien: Amine S. - Date prévue: 15/04/2026 11:00 - Problème: Rouleau d'entrainement"><i class="bi bi-tools"></i></a><a href="#" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Facture FAC-2026-118 - Date facture: 12/04/2026 - Consommation produit: Papier A3 x6 + Toner magenta x1 - Montant: 1320 EUR"><i class="bi bi-receipt-cutoff"></i></a></td></tr>
+                  <tr><td>Zeta Sante</td><td>Youssef Alaoui</td><td>accueil@zeta-sante.fr</td><td>02 40 33 49 86</td><td>3 Rue de la Loire, 44000 Nantes</td><td class="table-actions"><a href="#" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Livraison prévue le 22/04/2026 - Livreur: Rachid M. - Produit: PC bureautique x2"><i class="bi bi-truck"></i></a></td></tr>
+                  <tr><td>Nova Legal</td><td>Julie Renaud</td><td>contact@nova-legal.fr</td><td>03 88 16 75 44</td><td>27 Rue des Freres, 67000 Strasbourg</td><td class="table-actions"><a href="#" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="SAV SAV20260417031 - Technicien: Youssef El Idrissi - Date prévue: 17/04/2026 16:00 - Problème: Erreur scanner"><i class="bi bi-tools"></i></a></td></tr>
+                  <tr><td>Orion Tech</td><td>Hicham Bekkali</td><td>infos@orion-tech.fr</td><td>04 67 19 53 62</td><td>19 Rue Foch, 34000 Montpellier</td><td class="table-actions"><a href="#" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Livraison prévue le 23/04/2026 - Livreur: Nadia K. - Produit: LCD 24 pouces x1"><i class="bi bi-truck"></i></a><a href="#" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Facture FAC-2026-121 - Date facture: 13/04/2026 - Consommation produit: Ecran LCD x1 + Toner noir x6 - Montant: 5100 EUR"><i class="bi bi-receipt-cutoff"></i></a></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal fade" id="addClientModal" tabindex="-1" aria-labelledby="addClientModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title h5 mb-0" id="addClientModalLabel">Ajouter un client</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+        </div>
+        <div class="modal-body">
+          <form id="addClientForm" class="row g-3">
+
+            <!-- ── 1. INFORMATIONS CLIENT ── -->
+            <div class="col-12"><h3 class="h6 fw-bold border-bottom pb-1 mb-0 mt-1">Informations client</h3></div>
+            <div class="col-md-6">
+              <label for="clientRaisonSociale" class="form-label">Raison sociale <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="clientRaisonSociale" required>
+            </div>
+            <div class="col-md-6">
+              <label for="clientDirigeant" class="form-label">Dirigeant <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="clientDirigeant" required>
+            </div>
+            <div class="col-md-6">
+              <label for="clientEmail" class="form-label">Email <span class="text-danger">*</span></label>
+              <input type="email" class="form-control" id="clientEmail" required>
+            </div>
+            <div class="col-md-3">
+              <label for="clientTelephone" class="form-label">Téléphone <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="clientTelephone" required>
+            </div>
+            <div class="col-md-3">
+              <label for="clientTelephone2" class="form-label">Téléphone 2</label>
+              <input type="text" class="form-control" id="clientTelephone2">
+            </div>
+            <div class="col-md-6">
+              <label for="clientAdresse" class="form-label">Adresse <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="clientAdresse" required>
+            </div>
+            <div class="col-md-3">
+              <label for="clientCodePostal" class="form-label">Code postal <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="clientCodePostal" maxlength="5" required>
+            </div>
+            <div class="col-md-3">
+              <label for="clientVille" class="form-label">Ville <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="clientVille" required>
+            </div>
+            <div class="col-md-4">
+              <label for="clientSiret" class="form-label">SIRET <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="clientSiret" required>
+            </div>
+            <div class="col-md-4">
+              <label for="clientTva" class="form-label">Numéro TVA <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="clientTva" required>
+            </div>
+            <div class="col-md-2">
+              <label for="clientCodeInterne" class="form-label">Code client</label>
+              <input type="text" class="form-control" id="clientCodeInterne" readonly>
+            </div>
+            <div class="col-md-2">
+              <label for="clientContractNumber" class="form-label">N° contrat</label>
+              <input type="text" class="form-control" id="clientContractNumber" readonly>
+            </div>
+            <div class="col-md-6">
+              <label for="clientParrain" class="form-label">Comment avez-vous connu Cccomputer ?</label>
+              <input type="text" class="form-control" id="clientParrain" placeholder="Parrain, publicité, bouche à oreille...">
+            </div>
+            <div class="col-md-6">
+              <label for="clientOffre" class="form-label">Offre choisie <span class="text-danger">*</span></label>
+              <select id="clientOffre" class="form-select" required>
+                <option value="" selected disabled>Choisir une offre</option>
+                <option value="Pack offre 1000">Pack offre 1000</option>
+                <option value="Pack offre 2000">Pack offre 2000</option>
+              </select>
+            </div>
+
+            <!-- ── 2. MODE DE PAIEMENT ── -->
+            <div class="col-12"><h3 class="h6 fw-bold border-bottom pb-1 mb-0 mt-2">Mode de paiement (dépôt de garantie)</h3></div>
+            <div class="col-md-6">
+              <label class="form-label">Mode de paiement <span class="text-danger">*</span></label>
+              <div class="d-flex gap-3 mt-1">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="clientModePaiement" id="clientModePaiementPrel" value="prelevement" checked>
+                  <label class="form-check-label" for="clientModePaiementPrel">Prélèvement</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="clientModePaiement" id="clientModePaiementCheque" value="cheque">
+                  <label class="form-check-label" for="clientModePaiementCheque">Chèque</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="clientModePaiement" id="clientModePaiementEspeces" value="especes">
+                  <label class="form-check-label" for="clientModePaiementEspeces">Espèces</label>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6" id="clientNumeroChequeWrapper" style="display:none">
+              <label for="clientNumeroCheque" class="form-label">Numéro de chèque</label>
+              <input type="text" class="form-control" id="clientNumeroCheque" placeholder="N° chèque">
+            </div>
+
+            <!-- ── 3. MATÉRIEL ── -->
+            <div class="col-12"><h3 class="h6 fw-bold border-bottom pb-1 mb-0 mt-2">Matériel loué</h3></div>
+            <div class="col-md-3">
+              <label for="clientMarque" class="form-label">Marque</label>
+              <input type="text" class="form-control" id="clientMarque" value="RICOH">
+            </div>
+            <div class="col-md-4">
+              <label for="clientModele" class="form-label">Modèle</label>
+              <select class="form-select" id="clientModele">
+                <option value="">-- Sélectionner --</option>
+                <option value="MP C3002/C3502">MP C3002/C3502</option>
+                <option value="MP C3003/C3503">MP C3003/C3503</option>
+                <option value="MP C3004/C3504">MP C3004/C3504</option>
+                <option value="Autre">Autre</option>
+              </select>
+            </div>
+            <div class="col-md-5">
+              <label for="clientNumeroSerie" class="form-label">N° de série</label>
+              <input type="text" class="form-control" id="clientNumeroSerie" placeholder="Numéro de série">
+            </div>
+            <div class="col-md-6">
+              <label for="clientCompteurNB" class="form-label">Relevé compteur N&amp;B (à la livraison)</label>
+              <input type="number" class="form-control" id="clientCompteurNB" min="0" value="0">
+            </div>
+            <div class="col-md-6">
+              <label for="clientCompteurCouleur" class="form-label">Relevé compteur Couleur (à la livraison)</label>
+              <input type="number" class="form-control" id="clientCompteurCouleur" min="0" value="0">
+            </div>
+
+            <!-- ── 4. INFOS RESPONSABLE BOUTIQUE ── -->
+            <div class="col-12"><h3 class="h6 fw-bold border-bottom pb-1 mb-0 mt-2">Infos vente — Responsable boutique</h3></div>
+            <div class="col-md-6">
+              <label for="clientResponsableBoutique" class="form-label">Responsable boutique</label>
+              <input type="text" class="form-control" id="clientResponsableBoutique">
+            </div>
+            <div class="col-md-6">
+              <label for="clientTelephoneResponsable" class="form-label">Téléphone responsable</label>
+              <input type="text" class="form-control" id="clientTelephoneResponsable">
+            </div>
+
+            <!-- ── 5. HORAIRES ── -->
+            <div class="col-12"><h3 class="h6 fw-bold border-bottom pb-1 mb-0 mt-2">Horaires d'ouverture</h3></div>
+            <div class="col-12">
+              <div class="table-responsive">
+                <table class="table table-sm table-bordered mb-0 align-middle">
+                  <thead class="table-light">
+                    <tr>
+                      <th style="width:90px">Jour</th>
+                      <th>Matin début</th>
+                      <th>Matin fin</th>
+                      <th>Après-Midi début</th>
+                      <th>Après-Midi fin</th>
+                      <th class="text-center" style="width:70px">Fermé</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="fw-bold">Lundi</td><td><input type="time" class="form-control form-control-sm" id="hLundiMD"></td><td><input type="time" class="form-control form-control-sm" id="hLundiMF"></td><td><input type="time" class="form-control form-control-sm" id="hLundiAD"></td><td><input type="time" class="form-control form-control-sm" id="hLundiAF"></td><td class="text-center"><input class="form-check-input" type="checkbox" id="hLundiF"></td></tr>
+                    <tr><td class="fw-bold">Mardi</td><td><input type="time" class="form-control form-control-sm" id="hMardiMD"></td><td><input type="time" class="form-control form-control-sm" id="hMardiMF"></td><td><input type="time" class="form-control form-control-sm" id="hMardiAD"></td><td><input type="time" class="form-control form-control-sm" id="hMardiAF"></td><td class="text-center"><input class="form-check-input" type="checkbox" id="hMardiF"></td></tr>
+                    <tr><td class="fw-bold">Mercredi</td><td><input type="time" class="form-control form-control-sm" id="hMercrediMD"></td><td><input type="time" class="form-control form-control-sm" id="hMercrediMF"></td><td><input type="time" class="form-control form-control-sm" id="hMercrediAD"></td><td><input type="time" class="form-control form-control-sm" id="hMercrediAF"></td><td class="text-center"><input class="form-check-input" type="checkbox" id="hMercrediF"></td></tr>
+                    <tr><td class="fw-bold">Jeudi</td><td><input type="time" class="form-control form-control-sm" id="hJeudiMD"></td><td><input type="time" class="form-control form-control-sm" id="hJeudiMF"></td><td><input type="time" class="form-control form-control-sm" id="hJeudiAD"></td><td><input type="time" class="form-control form-control-sm" id="hJeudiAF"></td><td class="text-center"><input class="form-check-input" type="checkbox" id="hJeudiF"></td></tr>
+                    <tr><td class="fw-bold">Vendredi</td><td><input type="time" class="form-control form-control-sm" id="hVendrediMD"></td><td><input type="time" class="form-control form-control-sm" id="hVendrediMF"></td><td><input type="time" class="form-control form-control-sm" id="hVendrediAD"></td><td><input type="time" class="form-control form-control-sm" id="hVendrediAF"></td><td class="text-center"><input class="form-check-input" type="checkbox" id="hVendrediF"></td></tr>
+                    <tr><td class="fw-bold">Samedi</td><td><input type="time" class="form-control form-control-sm" id="hSamediMD"></td><td><input type="time" class="form-control form-control-sm" id="hSamediMF"></td><td><input type="time" class="form-control form-control-sm" id="hSamediAD"></td><td><input type="time" class="form-control form-control-sm" id="hSamediAF"></td><td class="text-center"><input class="form-check-input" type="checkbox" id="hSamediF"></td></tr>
+                    <tr><td class="fw-bold">Dimanche</td><td><input type="time" class="form-control form-control-sm" id="hDimancheMD"></td><td><input type="time" class="form-control form-control-sm" id="hDimancheMF"></td><td><input type="time" class="form-control form-control-sm" id="hDimancheAD"></td><td><input type="time" class="form-control form-control-sm" id="hDimancheAF"></td><td class="text-center"><input class="form-check-input" type="checkbox" id="hDimancheF"></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- ── 6. TARIFS CLIENT FINAL ── -->
+            <div class="col-12"><h3 class="h6 fw-bold border-bottom pb-1 mb-0 mt-2">Tarifs client final (€ HT)</h3></div>
+            <div class="col-md-3">
+              <label for="clientTarifCopieNB" class="form-label">Copie N&amp;B (€)</label>
+              <input type="number" class="form-control" id="clientTarifCopieNB" step="0.001" min="0" placeholder="0,000">
+            </div>
+            <div class="col-md-3">
+              <label for="clientTarifCopieCouleur" class="form-label">Copie Couleur (€)</label>
+              <input type="number" class="form-control" id="clientTarifCopieCouleur" step="0.001" min="0" placeholder="0,000">
+            </div>
+            <div class="col-md-3">
+              <label for="clientTarifImpressionNB" class="form-label">Impression N&amp;B (€)</label>
+              <input type="number" class="form-control" id="clientTarifImpressionNB" step="0.001" min="0" placeholder="0,000">
+            </div>
+            <div class="col-md-3">
+              <label for="clientTarifImpressionCouleur" class="form-label">Impression Couleur (€)</label>
+              <input type="number" class="form-control" id="clientTarifImpressionCouleur" step="0.001" min="0" placeholder="0,000">
+            </div>
+            <div class="col-md-3">
+              <label for="clientTarifScan" class="form-label">Scan (€)</label>
+              <input type="number" class="form-control" id="clientTarifScan" step="0.001" min="0" placeholder="0,000">
+            </div>
+            <div class="col-md-3">
+              <label for="clientTarifFax" class="form-label">Fax (€)</label>
+              <input type="number" class="form-control" id="clientTarifFax" step="0.001" min="0" placeholder="0,000">
+            </div>
+
+            <!-- ── 7. MANDAT SEPA ── -->
+            <div class="col-12"><h3 class="h6 fw-bold border-bottom pb-1 mb-0 mt-2">Mandat de prélèvement SEPA</h3></div>
+            <div class="col-md-8">
+              <label for="clientIban" class="form-label">IBAN</label>
+              <input type="text" class="form-control" id="clientIban" placeholder="FR76 XXXX XXXX XXXX XXXX XXXX XXX" maxlength="34">
+            </div>
+            <div class="col-md-4">
+              <label for="clientBic" class="form-label">BIC</label>
+              <input type="text" class="form-control" id="clientBic" placeholder="XXXXXXXX" maxlength="11">
+            </div>
+
+            <!-- ── 8. ADRESSE DE LIVRAISON ── -->
+            <div class="col-12"><h3 class="h6 fw-bold border-bottom pb-1 mb-0 mt-2">Adresse de livraison</h3></div>
+            <div class="col-12">
+              <div class="form-check mt-1">
+                <input class="form-check-input" type="checkbox" id="sameDeliveryAddress" checked>
+                <label class="form-check-label" for="sameDeliveryAddress">Identique à l'adresse du siège</label>
+              </div>
+            </div>
+            <div class="col-12">
+              <input type="text" class="form-control" id="clientDeliveryAddress" disabled placeholder="Adresse de livraison du photocopieur">
+            </div>
+
+            <!-- ── 9. APERÇU CONTRAT ── -->
+            <div class="col-12"><h3 class="h6 fw-bold border-bottom pb-1 mb-0 mt-2">Aperçu contrat</h3></div>
+            <div class="col-12">
+              <textarea id="clientContractPreview" class="form-control font-monospace" rows="6" readonly placeholder='Cliquez sur "Générer contrat PDF" pour créer le contrat.'></textarea>
+            </div>
+
+            <!-- ── 10. DOCUMENTS ── -->
+            <div class="col-12"><h3 class="h6 fw-bold border-bottom pb-1 mb-0 mt-2">Documents (uploads)</h3></div>
+            <div class="col-md-6">
+              <label for="uploadRib" class="form-label">RIB</label>
+              <input type="file" class="form-control" id="uploadRib">
+            </div>
+            <div class="col-md-6">
+              <label for="uploadIdentity" class="form-label">Pièce d'identité</label>
+              <input type="file" class="form-control" id="uploadIdentity">
+            </div>
+            <div class="col-md-6">
+              <label for="uploadKbis" class="form-label">KBIS</label>
+              <input type="file" class="form-control" id="uploadKbis">
+            </div>
+            <div class="col-md-6">
+              <label for="uploadOther" class="form-label">Autre document</label>
+              <input type="file" class="form-control" id="uploadOther">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Annuler</button>
+          <button type="button" class="btn btn-outline-primary" id="generateContractBtn">Générer contrat PDF</button>
+          <button type="button" class="btn btn-primary" id="saveClientBtn" disabled>Enregistrer le client</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="editClientModal" tabindex="-1" aria-labelledby="editClientModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title h5 mb-0" id="editClientModalLabel">Fiche client (modifier)</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+        </div>
+        <div class="modal-body">
+          <form id="editClientForm" class="row g-3">
+
+            <!-- ── 1. INFORMATIONS CLIENT ── -->
+            <div class="col-12"><h3 class="h6 fw-bold border-bottom pb-1 mb-0 mt-1">Informations client</h3></div>
+            <div class="col-md-6">
+              <label for="editClientRaisonSociale" class="form-label">Raison sociale <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="editClientRaisonSociale" required>
+            </div>
+            <div class="col-md-6">
+              <label for="editClientDirigeant" class="form-label">Dirigeant <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="editClientDirigeant" required>
+            </div>
+            <div class="col-md-6">
+              <label for="editClientEmail" class="form-label">Email <span class="text-danger">*</span></label>
+              <input type="email" class="form-control" id="editClientEmail" required>
+            </div>
+            <div class="col-md-3">
+              <label for="editClientTelephone" class="form-label">Téléphone <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="editClientTelephone" required>
+            </div>
+            <div class="col-md-3">
+              <label for="editClientTelephone2" class="form-label">Téléphone 2</label>
+              <input type="text" class="form-control" id="editClientTelephone2">
+            </div>
+            <div class="col-md-6">
+              <label for="editClientAdresse" class="form-label">Adresse <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="editClientAdresse" required>
+            </div>
+            <div class="col-md-3">
+              <label for="editClientCodePostal" class="form-label">Code postal <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="editClientCodePostal" maxlength="5" required>
+            </div>
+            <div class="col-md-3">
+              <label for="editClientVille" class="form-label">Ville <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="editClientVille" required>
+            </div>
+            <div class="col-md-4">
+              <label for="editClientSiret" class="form-label">SIRET</label>
+              <input type="text" class="form-control" id="editClientSiret">
+            </div>
+            <div class="col-md-4">
+              <label for="editClientTva" class="form-label">Numéro TVA</label>
+              <input type="text" class="form-control" id="editClientTva">
+            </div>
+            <div class="col-md-2">
+              <label for="editClientCodeInterne" class="form-label">Code client</label>
+              <input type="text" class="form-control" id="editClientCodeInterne" readonly>
+            </div>
+            <div class="col-md-2">
+              <label for="editClientContractNumber" class="form-label">N° contrat</label>
+              <input type="text" class="form-control" id="editClientContractNumber" readonly>
+            </div>
+            <div class="col-md-6">
+              <label for="editClientParrain" class="form-label">Comment a-t-il connu Cccomputer ?</label>
+              <input type="text" class="form-control" id="editClientParrain">
+            </div>
+            <div class="col-md-6">
+              <label for="editClientOffre" class="form-label">Offre choisie</label>
+              <select id="editClientOffre" class="form-select">
+                <option value="">Aucune</option>
+                <option value="Pack offre 1000">Pack offre 1000</option>
+                <option value="Pack offre 2000">Pack offre 2000</option>
+              </select>
+            </div>
+
+            <!-- ── 2. MODE DE PAIEMENT ── -->
+            <div class="col-12"><h3 class="h6 fw-bold border-bottom pb-1 mb-0 mt-2">Mode de paiement</h3></div>
+            <div class="col-md-6">
+              <label class="form-label">Mode de paiement</label>
+              <div class="d-flex gap-3 mt-1">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="editClientModePaiement" id="editClientModePaiementPrel" value="prelevement" checked>
+                  <label class="form-check-label" for="editClientModePaiementPrel">Prélèvement</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="editClientModePaiement" id="editClientModePaiementCheque" value="cheque">
+                  <label class="form-check-label" for="editClientModePaiementCheque">Chèque</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="editClientModePaiement" id="editClientModePaiementEspeces" value="especes">
+                  <label class="form-check-label" for="editClientModePaiementEspeces">Espèces</label>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6" id="editClientNumeroChequeWrapper" style="display:none">
+              <label for="editClientNumeroCheque" class="form-label">Numéro de chèque</label>
+              <input type="text" class="form-control" id="editClientNumeroCheque">
+            </div>
+
+            <!-- ── 3. MATÉRIEL ── -->
+            <div class="col-12"><h3 class="h6 fw-bold border-bottom pb-1 mb-0 mt-2">Matériel loué</h3></div>
+            <div class="col-md-3">
+              <label for="editClientMarque" class="form-label">Marque</label>
+              <input type="text" class="form-control" id="editClientMarque">
+            </div>
+            <div class="col-md-4">
+              <label for="editClientModele" class="form-label">Modèle</label>
+              <select class="form-select" id="editClientModele">
+                <option value="">-- Sélectionner --</option>
+                <option value="MP C3002/C3502">MP C3002/C3502</option>
+                <option value="MP C3003/C3503">MP C3003/C3503</option>
+                <option value="MP C3004/C3504">MP C3004/C3504</option>
+                <option value="Autre">Autre</option>
+              </select>
+            </div>
+            <div class="col-md-5">
+              <label for="editClientNumeroSerie" class="form-label">N° de série</label>
+              <input type="text" class="form-control" id="editClientNumeroSerie">
+            </div>
+            <div class="col-md-6">
+              <label for="editClientCompteurNB" class="form-label">Relevé compteur N&amp;B (livraison)</label>
+              <input type="number" class="form-control" id="editClientCompteurNB" min="0">
+            </div>
+            <div class="col-md-6">
+              <label for="editClientCompteurCouleur" class="form-label">Relevé compteur Couleur (livraison)</label>
+              <input type="number" class="form-control" id="editClientCompteurCouleur" min="0">
+            </div>
+
+            <!-- ── 4. INFOS RESPONSABLE BOUTIQUE ── -->
+            <div class="col-12"><h3 class="h6 fw-bold border-bottom pb-1 mb-0 mt-2">Infos vente — Responsable boutique</h3></div>
+            <div class="col-md-6">
+              <label for="editClientResponsableBoutique" class="form-label">Responsable boutique</label>
+              <input type="text" class="form-control" id="editClientResponsableBoutique">
+            </div>
+            <div class="col-md-6">
+              <label for="editClientTelephoneResponsable" class="form-label">Téléphone responsable</label>
+              <input type="text" class="form-control" id="editClientTelephoneResponsable">
+            </div>
+
+            <!-- ── 5. HORAIRES ── -->
+            <div class="col-12"><h3 class="h6 fw-bold border-bottom pb-1 mb-0 mt-2">Horaires d'ouverture</h3></div>
+            <div class="col-12">
+              <div class="table-responsive">
+                <table class="table table-sm table-bordered mb-0 align-middle">
+                  <thead class="table-light">
+                    <tr>
+                      <th style="width:90px">Jour</th>
+                      <th>Matin début</th>
+                      <th>Matin fin</th>
+                      <th>Après-Midi début</th>
+                      <th>Après-Midi fin</th>
+                      <th class="text-center" style="width:70px">Fermé</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="fw-bold">Lundi</td><td><input type="time" class="form-control form-control-sm" id="editHLundiMD"></td><td><input type="time" class="form-control form-control-sm" id="editHLundiMF"></td><td><input type="time" class="form-control form-control-sm" id="editHLundiAD"></td><td><input type="time" class="form-control form-control-sm" id="editHLundiAF"></td><td class="text-center"><input class="form-check-input" type="checkbox" id="editHLundiF"></td></tr>
+                    <tr><td class="fw-bold">Mardi</td><td><input type="time" class="form-control form-control-sm" id="editHMardiMD"></td><td><input type="time" class="form-control form-control-sm" id="editHMardiMF"></td><td><input type="time" class="form-control form-control-sm" id="editHMardiAD"></td><td><input type="time" class="form-control form-control-sm" id="editHMardiAF"></td><td class="text-center"><input class="form-check-input" type="checkbox" id="editHMardiF"></td></tr>
+                    <tr><td class="fw-bold">Mercredi</td><td><input type="time" class="form-control form-control-sm" id="editHMercrediMD"></td><td><input type="time" class="form-control form-control-sm" id="editHMercrediMF"></td><td><input type="time" class="form-control form-control-sm" id="editHMercrediAD"></td><td><input type="time" class="form-control form-control-sm" id="editHMercrediAF"></td><td class="text-center"><input class="form-check-input" type="checkbox" id="editHMercrediF"></td></tr>
+                    <tr><td class="fw-bold">Jeudi</td><td><input type="time" class="form-control form-control-sm" id="editHJeudiMD"></td><td><input type="time" class="form-control form-control-sm" id="editHJeudiMF"></td><td><input type="time" class="form-control form-control-sm" id="editHJeudiAD"></td><td><input type="time" class="form-control form-control-sm" id="editHJeudiAF"></td><td class="text-center"><input class="form-check-input" type="checkbox" id="editHJeudiF"></td></tr>
+                    <tr><td class="fw-bold">Vendredi</td><td><input type="time" class="form-control form-control-sm" id="editHVendrediMD"></td><td><input type="time" class="form-control form-control-sm" id="editHVendrediMF"></td><td><input type="time" class="form-control form-control-sm" id="editHVendrediAD"></td><td><input type="time" class="form-control form-control-sm" id="editHVendrediAF"></td><td class="text-center"><input class="form-check-input" type="checkbox" id="editHVendrediF"></td></tr>
+                    <tr><td class="fw-bold">Samedi</td><td><input type="time" class="form-control form-control-sm" id="editHSamediMD"></td><td><input type="time" class="form-control form-control-sm" id="editHSamediMF"></td><td><input type="time" class="form-control form-control-sm" id="editHSamediAD"></td><td><input type="time" class="form-control form-control-sm" id="editHSamediAF"></td><td class="text-center"><input class="form-check-input" type="checkbox" id="editHSamediF"></td></tr>
+                    <tr><td class="fw-bold">Dimanche</td><td><input type="time" class="form-control form-control-sm" id="editHDimancheMD"></td><td><input type="time" class="form-control form-control-sm" id="editHDimancheMF"></td><td><input type="time" class="form-control form-control-sm" id="editHDimancheAD"></td><td><input type="time" class="form-control form-control-sm" id="editHDimancheAF"></td><td class="text-center"><input class="form-check-input" type="checkbox" id="editHDimancheF"></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- ── 6. TARIFS ── -->
+            <div class="col-12"><h3 class="h6 fw-bold border-bottom pb-1 mb-0 mt-2">Tarifs client final (€ HT)</h3></div>
+            <div class="col-md-3">
+              <label for="editClientTarifCopieNB" class="form-label">Copie N&amp;B (€)</label>
+              <input type="number" class="form-control" id="editClientTarifCopieNB" step="0.001" min="0">
+            </div>
+            <div class="col-md-3">
+              <label for="editClientTarifCopieCouleur" class="form-label">Copie Couleur (€)</label>
+              <input type="number" class="form-control" id="editClientTarifCopieCouleur" step="0.001" min="0">
+            </div>
+            <div class="col-md-3">
+              <label for="editClientTarifImpressionNB" class="form-label">Impression N&amp;B (€)</label>
+              <input type="number" class="form-control" id="editClientTarifImpressionNB" step="0.001" min="0">
+            </div>
+            <div class="col-md-3">
+              <label for="editClientTarifImpressionCouleur" class="form-label">Impression Couleur (€)</label>
+              <input type="number" class="form-control" id="editClientTarifImpressionCouleur" step="0.001" min="0">
+            </div>
+            <div class="col-md-3">
+              <label for="editClientTarifScan" class="form-label">Scan (€)</label>
+              <input type="number" class="form-control" id="editClientTarifScan" step="0.001" min="0">
+            </div>
+            <div class="col-md-3">
+              <label for="editClientTarifFax" class="form-label">Fax (€)</label>
+              <input type="number" class="form-control" id="editClientTarifFax" step="0.001" min="0">
+            </div>
+
+            <!-- ── 7. SEPA ── -->
+            <div class="col-12"><h3 class="h6 fw-bold border-bottom pb-1 mb-0 mt-2">Mandat SEPA</h3></div>
+            <div class="col-md-8">
+              <label for="editClientIban" class="form-label">IBAN</label>
+              <input type="text" class="form-control" id="editClientIban" maxlength="34">
+            </div>
+            <div class="col-md-4">
+              <label for="editClientBic" class="form-label">BIC</label>
+              <input type="text" class="form-control" id="editClientBic" maxlength="11">
+            </div>
+
+            <!-- ── 8. ADRESSE DE LIVRAISON ── -->
+            <div class="col-12"><h3 class="h6 fw-bold border-bottom pb-1 mb-0 mt-2">Adresse de livraison</h3></div>
+            <div class="col-12">
+              <input type="text" class="form-control" id="editClientDeliveryAddress">
+            </div>
+
+            <!-- ── 9. DOCUMENTS ── -->
+            <div class="col-12"><h3 class="h6 fw-bold border-bottom pb-1 mb-0 mt-2">Documents (fichiers)</h3></div>
+            <div class="col-md-6">
+              <label class="form-label">RIB (actuel)</label>
+              <input type="text" class="form-control mb-1" id="editUploadRibName" readonly>
+              <input type="file" class="form-control" id="editUploadRib">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Pièce d'identité (actuelle)</label>
+              <input type="text" class="form-control mb-1" id="editUploadIdentityName" readonly>
+              <input type="file" class="form-control" id="editUploadIdentity">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">KBIS (actuel)</label>
+              <input type="text" class="form-control mb-1" id="editUploadKbisName" readonly>
+              <input type="file" class="form-control" id="editUploadKbis">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Autre document (actuel)</label>
+              <input type="text" class="form-control mb-1" id="editUploadOtherName" readonly>
+              <input type="file" class="form-control" id="editUploadOther">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Annuler</button>
+          <button type="button" class="btn btn-primary" id="saveEditClientBtn">Enregistrer les modifications</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <script src="assets/js/contract-pdf.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script>
+    // Afficher/masquer le champ N° chèque selon le mode de paiement
+    document.querySelectorAll('input[name="clientModePaiement"]').forEach(r => {
+      r.addEventListener("change", () => {
+        const wrap = document.getElementById("clientNumeroChequeWrapper");
+        if (wrap) wrap.style.display = r.value === "cheque" && r.checked ? "" : (document.querySelector('input[name="clientModePaiement"]:checked')?.value === "cheque" ? "" : "none");
+      });
+    });
+    document.querySelectorAll('input[name="editClientModePaiement"]').forEach(r => {
+      r.addEventListener("change", () => {
+        const wrap = document.getElementById("editClientNumeroChequeWrapper");
+        if (wrap) wrap.style.display = document.querySelector('input[name="editClientModePaiement"]:checked')?.value === "cheque" ? "" : "none";
+      });
+    });
+  </script>
+</body>
+</html>
